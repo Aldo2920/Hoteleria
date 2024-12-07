@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Sign Up</title>
+    <link rel="stylesheet" href="for.css" />
+    <script>
+      // Funciones para manejar el localStorage
+      const loadDatabase = () =>
+        JSON.parse(localStorage.getItem("users")) || [];
+      const saveDatabase = (data) =>
+        localStorage.setItem("users", JSON.stringify(data));
+
+      // Alternar entre los formularios de Login y Sign Up
+      function toggleForms(showLogin) {
+        // Cambiar entre formularios de login y registro
+        document.getElementById("login-form").style.display = showLogin
+          ? "block"
+          : "none";
+        document.getElementById("signup-form").style.display = showLogin
+          ? "none"
+          : "block";
+      }
+
+      // Registro de usuario
+      function signUp(event) {
+        event.preventDefault();
+        const username = document
+          .getElementById("signup-username")
+          .value.trim();
+        const password = document
+          .getElementById("signup-password")
+          .value.trim();
+
+        if (!username || !password) {
+          alert("Por favor, complete todos los campos.");
+          return;
+        }
+
+        const database = loadDatabase();
+
+        // Verificar si el usuario ya existe
+        const userExists = database.some((user) => user.username === username);
+        if (userExists) {
+          alert("El usuario ya está registrado.");
+          return;
+        }
+
+        // Agregar el usuario a la base de datos
+        database.push({ username, password });
+        saveDatabase(database);
+        alert("¡Registro exitoso!");
+
+        // Limpiar los campos
+        document.getElementById("signup-username").value = "";
+        document.getElementById("signup-password").value = "";
+
+        // Mostrar el formulario de login después de un registro exitoso
+        toggleForms(true);
+      }
+
+      // Inicio de sesión
+      function loginSuccess(event) {
+        event.preventDefault();
+        const username = document.getElementById("login-username").value.trim();
+        const password = document.getElementById("login-password").value.trim();
+
+        const database = loadDatabase();
+
+        // Validar usuario y contraseña
+        const user = database.find(
+          (user) => user.username === username && user.password === password
+        );
+
+        if (user) {
+          alert("¡Ingreso exitoso!");
+          setTimeout(() => {
+            window.location.href = "paga.html"; // Cambiar a la página principal después del login.
+          }, 1000);
+        } else {
+          alert("Usuario o contraseña incorrectos.");
+        }
+      }
+
+      // Recuperar contraseña
+      function resetPassword(event) {
+        event.preventDefault();
+        const username = prompt(
+          "Ingrese su nombre de usuario para recuperar la contraseña:"
+        );
+        if (!username) return;
+
+        const database = loadDatabase();
+        const user = database.find((user) => user.username === username);
+
+        if (!user) {
+          alert("El usuario no existe.");
+        } else {
+          const newPassword = prompt("Ingrese su nueva contraseña:");
+          if (!newPassword) return;
+          user.password = newPassword;
+          saveDatabase(database);
+          alert("Contraseña actualizada con éxito.");
+        }
+      }
+
+      // Al cargar la página, mostrar el formulario de login
+      window.onload = function () {
+        toggleForms(true);
+      };
+    </script>
+    <style>
+      /* Centrar el botón "Forgot Password" */
+      #login-form .button3 {
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <!-- Formulario de Login -->
+      <form id="login-form" class="form" onsubmit="loginSuccess(event)">
+        <p id="heading">Login</p>
+        <div class="field">
+          <input
+            id="login-username"
+            autocomplete="off"
+            placeholder="Username"
+            class="input-field"
+            type="text"
+          />
+        </div>
+        <div class="field">
+          <input
+            id="login-password"
+            placeholder="Password"
+            class="input-field"
+            type="password"
+          />
+        </div>
+        <div class="btn">
+          <button class="button1" type="submit">Login</button>
+          <button class="button2" type="button" onclick="toggleForms(false)">
+            Sign Up
+          </button>
+        </div>
+        <!-- Botón Forgot Password centrado -->
+        <button class="button3" type="button" onclick="resetPassword(event)">
+          Forgot Password
+        </button>
+      </form>
+
+      <!-- Formulario de Registro -->
+      <form
+        id="signup-form"
+        class="form"
+        onsubmit="signUp(event)"
+        style="display: none"
+      >
+        <p id="heading">Sign Up</p>
+        <div class="field">
+          <input
+            id="signup-username"
+            autocomplete="off"
+            placeholder="Username"
+            class="input-field"
+            type="text"
+          />
+        </div>
+        <div class="field">
+          <input
+            id="signup-password"
+            placeholder="Password"
+            class="input-field"
+            type="password"
+          />
+        </div>
+        <div class="btn">
+          <button class="button1" type="submit">Register</button>
+          <button class="button2" type="button" onclick="toggleForms(true)">
+            Back to Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

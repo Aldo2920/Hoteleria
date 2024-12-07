@@ -1,0 +1,237 @@
+/* Cambiar el fondo del contenedor principal a transparente */
+.master-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed; /* Hace que el contenedor esté fijo */
+  top: 50%; /* Centrado vertical */
+  left: 50%; /* Centrado horizontal */
+  transform: translate(-50%, -50%); /* Alinea perfectamente al centro */
+  background-color: rgba(249, 249, 249, 0.8); /* Fondo con opacidad */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Sombra para hacer el contenedor más visible */
+  z-index: 9999; /* Asegura que esté por encima de otros elementos */
+  width: 450px; /* Aumentar el ancho del contenedor */
+  font-family: Arial, sans-serif; /* Asegurar una fuente legible */
+}
+
+/* Mantener el logo como está */
+.hotel-logo img {
+  width: 120px; /* Ajusta el tamaño del logo */
+  height: auto;
+  margin-bottom: 20px; /* Espacio debajo del logo */
+}
+
+/* Estilo de las tarjetas */
+.card {
+  width: 400px;
+  background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+  border-radius: 10px;
+  margin-bottom: 20px; /* Espacio entre las tarjetas */
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-bottom: 1px solid #efeff3;
+  font-weight: 700;
+  font-size: 14px;
+  color: #63656b;
+}
+
+/* Estilo para la sección de cart */
+.cart {
+  border-radius: 19px 19px 7px 7px;
+}
+
+.cart .products {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.cart .products .product {
+  display: grid;
+  grid-template-columns: 60px 1fr 80px 1fr;
+  gap: 10px;
+}
+
+.cart .products .product span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #47484b;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cart .products .product p {
+  font-size: 11px;
+  font-weight: 600;
+  color: #7a7c81;
+}
+
+.cart .quantity {
+  height: 40px; /* Aumentar altura */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: auto;
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+  filter: drop-shadow(0px 1px 0px #efefef) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+  width: 100%; /* Asegurar que ocupe todo el espacio */
+}
+
+.cart .quantity input {
+  width: 100%; /* Asegura que el input ocupe el espacio disponible */
+  height: 30px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.cart .quantity label {
+  width: 20px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #141414e5;
+}
+
+.cart .quantity button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  padding-bottom: 2px;
+}
+
+.card .small {
+  font-size: 15px;
+  margin: 0 0 auto auto;
+}
+
+/* Estilo de los cupones */
+.coupons {
+  border-radius: 7px;
+}
+
+.coupons form {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  gap: 10px;
+  padding: 10px;
+}
+
+.coupons form input {
+  width: 100%; /* Hacer que el campo de cupón ocupe todo el espacio */
+  height: 36px;
+  padding: 0 0 0 12px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #e5e5e5;
+}
+
+.input_field {
+  width: auto;
+  height: 36px;
+  padding: 0 0 0 12px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.input_field:focus {
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 0px 2px #242424;
+  background-color: transparent;
+}
+
+.coupons form button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18px;
+  gap: 10px;
+  width: 100%;
+  height: 36px;
+  background: linear-gradient(180deg, #4480FF 0%, #115DFC 50%, #0550ED 100%);
+  box-shadow: 0px 0.5px 0.5px #EFEFEF, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
+  border-radius: 5px;
+  border: 0;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+}
+
+/* Estilo de Checkout */
+.checkout {
+  border-radius: 9px 9px 19px 19px;
+}
+
+.checkout .details {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  padding: 10px;
+  gap: 5px;
+}
+
+.checkout .details span {
+  font-size: 14px;
+}
+
+.checkout .details span:nth-child(odd) {
+  font-size: 11px;
+  font-weight: 700;
+  color: #707175;
+  margin: auto auto auto 0;
+}
+
+.checkout .details span:nth-child(even) {
+  color: #47484b;
+}
+
+.checkout .checkout--footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(249, 249, 249, 0.8); /* Fondo transparente */
+  border-radius: 0px 0px 19px 19px;
+}
+
+.checkout .checkout--footer .price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d2d2d;
+}
+
+.checkout .checkout--footer button {
+  padding: 15px 40px;
+  font-size: 16px;
+  background: linear-gradient(90deg, #5bb9ff, #4480ff);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
